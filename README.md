@@ -12,6 +12,8 @@ A modern, beautiful photo-sharing social network frontend built with HTML, CSS, 
 - **Real-time Notifications**: Interactive notification system
 - **Search Functionality**: Find users and content
 - **Story Features**: Share temporary stories
+- **Light/Dark Theme**: Toggle between light and dark themes
+- **Modular Architecture**: Clean, maintainable code structure
 
 ## Prerequisites
 
@@ -44,8 +46,11 @@ To run this JSP application, you need:
    ├── index.jsp
    ├── home.jsp
    ├── profile.jsp
-   ├── styles.css
+   ├── main.css
    ├── script.js
+   ├── css/
+   ├── js/
+   ├── components/
    └── README.md
    ```
 
@@ -69,149 +74,160 @@ To run this JSP application, you need:
    http://localhost:8080/photoshare/
    ```
 
-### Method 2: Using IDE (Recommended for development)
-1. **Eclipse IDE**:
-   - Install Eclipse IDE for Enterprise Java Developers
-   - Import the project as a Dynamic Web Project
-   - Configure Tomcat server in Eclipse
-   - Run the project directly from Eclipse
+### Method 2: Using the provided batch script
+1. Run the `run_photoshare.bat` script in the project directory
+2. This will automatically start Tomcat and open the application
 
-2. **IntelliJ IDEA**:
-   - Install IntelliJ IDEA Ultimate (supports JSP)
-   - Import the project
-   - Configure Tomcat server
-   - Run the project
+## Project Structure
 
-3. **VS Code**:
-   - Install Java Extension Pack
-   - Install Tomcat for Java extension
-   - Configure Tomcat server
-   - Run the project
+### Modular Architecture
 
-## File Structure
+The application has been refactored into a modular structure for better maintainability and scalability:
 
 ```
 photoshare/
-├── index.jsp          # Login and signup page
-├── home.jsp           # Main feed page
-├── profile.jsp        # User profile page
-├── styles.css         # All CSS styles
-├── script.js          # JavaScript functionality
-└── README.md          # This file
+├── index.jsp                    # Login page
+├── home.jsp                     # Home page (refactored)
+├── profile.jsp                  # Profile page (refactored)
+├── script.js                    # Legacy compatibility layer
+├── main.css                     # Main CSS file (imports all modules)
+├── run_photoshare.bat           # Tomcat management script
+├── README.md                    # This file
+├── css/                         # Modular CSS files
+│   ├── variables.css            # CSS custom properties and theme variables
+│   ├── base.css                 # Reset, base styles, and typography
+│   ├── components.css           # Reusable UI components
+│   ├── forms.css                # Form elements and input styles
+│   ├── navigation.css           # Navigation and header styles
+│   ├── layout.css               # Layout and grid systems
+│   ├── posts.css                # Post-related styles
+│   ├── stories.css              # Story-related styles
+│   ├── sidebar.css              # Sidebar and suggestions styles
+│   ├── themes.css               # Theme-specific styles
+│   ├── responsive.css           # Media queries and responsive design
+│   └── main.css                 # Main file that imports all components
+├── js/                          # Modular JavaScript files
+│   ├── app.js                   # Main application entry point
+│   ├── auth.js                  # Authentication and user management
+│   ├── posts.js                 # Post-related functionality
+│   ├── ui.js                    # General UI components and interactions
+│   ├── themes.js                # Theme management and settings
+│   └── utils.js                 # Utility functions and helpers
+└── components/                  # Reusable JSP components
+    ├── head.jsp                 # Common head section
+    ├── navigation.jsp           # Reusable navigation bar
+    ├── sidebar.jsp              # Reusable sidebar component
+    ├── stories.jsp              # Stories section component
+    ├── post.jsp                 # Individual post component
+    ├── settings-panel.jsp       # Settings panel component
+    ├── upload-modal.jsp         # Upload modal component
+    ├── profile-header.jsp       # Profile header component
+    ├── profile-stats-overview.jsp # Profile statistics component
+    ├── profile-tabs.jsp         # Profile tabs component
+    ├── profile-posts-grid.jsp   # Profile posts grid component
+    └── edit-profile-modal.jsp   # Edit profile modal component
 ```
 
-## Design Features
+### Key Improvements
 
-- **Modern UI**: Clean, minimalist design inspired by Instagram and Facebook
-- **Responsive Layout**: Adapts to different screen sizes
-- **Smooth Animations**: CSS transitions and hover effects
-- **Color Scheme**: Modern color palette with proper contrast
-- **Typography**: Clean, readable fonts using Google Fonts
-- **Icons**: Font Awesome icons for better visual appeal
+#### 1. Code Organization
+- **Before**: Single large files (1,200+ lines CSS, 930+ lines JS)
+- **After**: Multiple focused files (50-200 lines each)
 
-## Key Functionalities
+#### 2. Maintainability
+- **Before**: Difficult to find specific functionality
+- **After**: Clear file structure with specific responsibilities
 
-### Authentication
-- User login with username/email and password
-- Sign up with full name, email, username, and password
-- Remember me functionality
-- Social login options (Facebook, Google)
+#### 3. Reusability
+- **Before**: Code duplication across pages
+- **After**: Reusable components and modules
 
-### Post Interactions
-- Like and unlike posts
-- Comment on posts
-- Save posts to favorites
-- Share posts
-- View post details
+#### 4. Readability
+- **Before**: Monolithic files hard to navigate
+- **After**: Well-organized, self-documenting code
 
-### Profile Management
-- View user profile with statistics
-- Edit profile information
-- Upload profile picture
-- View posts, saved posts, and tagged posts
-- Follow/unfollow users
+#### 5. Developer Experience
+- **Before**: Difficult for multiple developers to work simultaneously
+- **After**: Clear separation of concerns, easier collaboration
 
-### Navigation
-- Responsive navigation bar
-- Search functionality
-- Notifications
-- User menu
+## How to Use the Modular Structure
 
-## Customization
-
-### Colors
-The application uses CSS custom properties for easy color customization. Main colors are defined in `styles.css`:
-
+### CSS
+The main CSS file (`main.css`) imports all modular CSS files:
 ```css
-:root {
-    --primary-color: #1877f2;
-    --secondary-color: #42a5f5;
-    --accent-color: #e91e63;
-    --background-color: #fafafa;
-    --text-color: #262626;
-    --border-color: #dbdbdb;
-}
+@import url('variables.css');
+@import url('base.css');
+@import url('components.css');
+/* ... etc */
 ```
 
-### Styling
-- All styles are in `styles.css`
-- Responsive breakpoints are defined for mobile, tablet, and desktop
-- Animations and transitions are customizable
+### JavaScript
+The main JavaScript file (`js/app.js`) imports and initializes all modules:
+```javascript
+import authModule from './auth.js';
+import postsModule from './posts.js';
+import uiModule from './ui.js';
+// ... etc
+```
 
-## Browser Support
+### JSP Components
+Pages use JSP includes for reusable components:
+```jsp
+<jsp:include page="components/navigation.jsp"/>
+<jsp:include page="components/sidebar.jsp"/>
+```
 
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
+## Benefits for Backend Integration
 
-## Troubleshooting
+### 1. Easier API Integration
+- Modular JavaScript makes it easier to integrate with backend APIs
+- Clear separation between UI logic and data management
+- Structured approach to handling API responses
 
-### Common Issues
+### 2. Component-Based Development
+- Reusable components can be easily connected to backend data
+- Consistent data flow patterns across the application
+- Easier to implement server-side rendering
 
-1. **JSP files downloading instead of rendering**:
-   - Make sure you're using Apache Tomcat, not a static file server
-   - Verify Tomcat is properly configured and running
-   - Check that files are in the correct webapps directory
+### 3. Maintainable Codebase
+- Clear file structure makes it easier for backend developers to understand
+- Modular approach allows for easier testing and debugging
+- Better organization for team collaboration
 
-2. **Tomcat won't start**:
-   - Check if port 8080 is already in use
-   - Verify JAVA_HOME is set correctly
-   - Check Tomcat logs in `[TOMCAT_HOME]/logs/`
+## Theme System
 
-3. **404 errors**:
-   - Ensure files are in the correct webapps directory
-   - Check file permissions
-   - Verify Tomcat is running
+The application includes a comprehensive theme system:
 
-4. **Styling issues**:
-   - Clear browser cache
-   - Check browser console for CSS errors
-   - Verify all CSS files are accessible
-
-### Getting Help
-
-If you encounter issues:
-1. Check Tomcat logs in `[TOMCAT_HOME]/logs/catalina.out`
-2. Check browser console for JavaScript errors
-3. Verify all file paths and permissions
-4. Ensure Java and Tomcat versions are compatible
+- **Light/Dark Themes**: Toggle between light and dark themes
+- **Theme Persistence**: User preferences are saved in localStorage
+- **System Theme Detection**: Automatically detects system theme preference
+- **Settings Panel**: Easy theme switching through the settings panel
 
 ## Future Enhancements
 
-- Backend integration with Java Servlets
-- Database integration
-- Real-time messaging
-- Advanced search filters
-- Post categories and hashtags
-- User stories and highlights
-- Advanced privacy settings
-- Mobile app development
+### 1. Build System
+- Implement a build system (Webpack, Vite) for better optimization
+- CSS and JS minification for production
+- Asset bundling and optimization
 
-## License
+### 2. Component Library
+- Create a comprehensive component library
+- Document component usage and API
+- Implement design system guidelines
 
-This project is open source and available under the MIT License.
+### 3. Testing
+- Add unit tests for JavaScript modules
+- Implement integration tests for components
+- Add visual regression testing
 
----
+## Conclusion
 
-**Note**: This is a frontend-only application. For production use, you'll need to implement proper backend services, database integration, and security measures. 
+The PhotoShare application features a modern, modular architecture that:
+
+- **Improves maintainability** through better code organization
+- **Enhances developer experience** with clear file structure
+- **Enables better collaboration** through separation of concerns
+- **Facilitates backend integration** with structured data flow
+- **Preserves all existing functionality** while improving code quality
+
+The modular structure makes the codebase more scalable, maintainable, and ready for future development and backend integration. 

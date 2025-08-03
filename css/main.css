@@ -1,0 +1,57 @@
+/* PhotoShare - Main CSS File */
+/* This file imports all modular CSS components */
+
+/* 1. CSS Variables and Theme System */
+@import url('variables.css');
+
+/* 2. Base Styles and Reset */
+@import url('base.css');
+
+/* 3. Reusable Components */
+@import url('components.css');
+
+/* 4. Form Styles */
+@import url('forms.css');
+
+/* 5. Navigation Styles */
+@import url('navigation.css');
+
+/* 6. Layout Styles */
+@import url('layout.css');
+
+/* 7. Posts Styles */
+@import url('posts.css');
+
+/* 8. Stories Styles */
+@import url('stories.css');
+
+/* 9. Sidebar Styles */
+@import url('sidebar.css');
+
+/* 10. Theme System Styles */
+@import url('themes.css');
+
+/* 11. Responsive Design */
+@import url('responsive.css');
+
+/* 
+CSS File Structure:
+├── variables.css      - CSS custom properties and theme variables
+├── base.css          - Reset, base styles, and typography
+├── components.css    - Reusable UI components (buttons, cards, modals)
+├── forms.css         - Form elements and input styles
+├── navigation.css    - Navigation and header styles
+├── layout.css        - Layout and grid systems
+├── posts.css         - Post-related styles
+├── stories.css       - Story-related styles
+├── sidebar.css       - Sidebar and suggestions styles
+├── themes.css        - Theme-specific styles and settings panel
+├── responsive.css    - Media queries and responsive design
+└── main.css          - Main file that imports all components
+
+This modular structure makes the codebase:
+- More maintainable and readable
+- Easier to debug and modify
+- Better organized for team collaboration
+- More scalable for future development
+*/ 

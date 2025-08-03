@@ -1,0 +1,283 @@
+/* Navigation Styles */
+
+/* Main Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+/* Navigation Left - Logo */
+.nav-left .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.nav-left .logo i {
+    font-size: 28px;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.nav-left .logo h1 {
+    font-size: 24px;
+    font-weight: 700;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+}
+
+@keyframes glow {
+    from { filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.5)); }
+    to { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.8)); }
+}
+
+/* Navigation Center - Search */
+.nav-center {
+    flex: 1;
+    max-width: 400px;
+    margin: 0 40px;
+}
+
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+.search-container i {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-tertiary);
+    font-size: 16px;
+    z-index: 2;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 12px 16px 12px 48px;
+    border: none;
+    border-radius: var(--border-radius);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 14px;
+    transition: var(--transition);
+}
+
+.search-container input:focus {
+    outline: none;
+    background: var(--bg-primary);
+    box-shadow: var(--shadow-light);
+}
+
+.search-container input::placeholder {
+    color: var(--text-tertiary);
+}
+
+/* Navigation Right - Actions */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Navigation Buttons */
+.nav-btn {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: var(--border-radius);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    overflow: hidden;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-gradient);
+    opacity: 0;
+    transition: var(--transition);
+    border-radius: var(--border-radius);
+    z-index: -1;
+}
+
+.nav-btn:hover::before {
+    opacity: 0.1;
+}
+
+.nav-btn:hover {
+    color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.nav-btn.active {
+    color: var(--primary-color);
+    background: var(--bg-glass);
+}
+
+/* Settings Button */
+.settings-btn {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: var(--border-radius);
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.settings-btn:hover {
+    color: var(--primary-color);
+    background: var(--bg-glass);
+    transform: rotate(90deg);
+}
+
+/* User Avatar */
+.user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    overflow: hidden;
+}
+
+.user-avatar:hover {
+    border-color: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* App Container */
+.app-container {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    padding-top: 80px;
+    transition: var(--transition);
+}
+
+.app-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-gradient);
+    opacity: 0.05;
+    z-index: -1;
+    animation: float 8s ease-in-out infinite;
+}
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    transition: var(--transition);
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 16px;
+    }
+    
+    .nav-center {
+        display: none;
+    }
+    
+    .nav-right {
+        gap: 4px;
+    }
+    
+    .nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 8px 12px;
+    }
+    
+    .nav-left .logo h1 {
+        font-size: 20px;
+    }
+    
+    .nav-left .logo i {
+        font-size: 24px;
+    }
+    
+    .nav-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+    }
+} 
